@@ -1,2 +1,3 @@
 # litt
-Linux Interactive Talking Terminal
+L.I.T.T.: Linux Interactive Talking Terminal
+
