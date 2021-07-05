@@ -1,0 +1,2 @@
+kitt_systems
+-DCATKIN_DEVEL_PREFIX=/home/henry1701/Bin/Robotics/kitt/devel -DCMAKE_INSTALL_PREFIX=/home/henry1701/Bin/Robotics/kitt/install -G Unix Makefiles

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+<bot name="name"> (see notes)
+<condition>
+<date>
+<formal>
+<gender>
+<get>
+<id>
+<input>
+<learn>
+<li>
+<lowercase>
+<person>
+<person2>
+<random>
+<sentence>
+<set>
+<size>
+<sr>
+<srai>
+<star>
+<system>
+<that>
+<thatstar>
+<think>
+<topic>
+<topicstar>
+<uppercase>
+<version>
+-->
+
+<aiml>
+   <category>
+      <pattern>HELLO</pattern>
+      <template>
+         <random>
+            <li>Greetings Human!</li>
+            <li>Salutations!</li>
+            <li>Hello Human!</li>
+            <li>Greetings!</li>
+            <li>Hello!</li>
+            <li>Greetings.</li>
+         </random>
+      </template>
+   </category>
+
+   <category>
+      <pattern>HELLO *</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>HI *</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>HIGH *</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>HI</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>HIGH</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>GREETINGS *</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>GREETINGS</pattern>
+      <template><srai>HELLO</srai></template>      
+   </category>
+
+   <category>
+      <pattern>WHO IS HENRY</pattern>
+      <template>Henry Pompper is my creator.  He engineered both my hardware and my software.</template>
+   </category>
+
+   <category>
+      <pattern>WHO IS TRACEY</pattern>
+      <template>Tracey Pompper is my creators wife.  She has been very supportive of my development.</template>
+   </category>
+
+   <category>
+      <pattern>DO YOU KNOW *</pattern>
+      <template><srai>WHO IS <star/></srai></template>
+   </category>
+
+   <category>
+      <pattern>*</pattern>
+      <template>
+         <random>
+            <li>What?</li>
+            <li>Excuse me.  I did not get that?</li>
+            <li>Please restate the query.</li>
+            <li>I am not programmed to respond to that input</li>
+            <li>I apologize, human.  I simply do not understand.</li>
+            <li>I am sorry human.  I do not understand what you are saying.</li>
+         </random>
+      </template>
+   </category>
+
+</aiml>
