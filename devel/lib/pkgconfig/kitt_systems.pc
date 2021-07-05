@@ -1,8 +1,0 @@
-prefix=/home/henry1701/Bin/Robotics/kitt/devel
-
-Name: kitt_systems
-Description: Description of kitt_systems
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

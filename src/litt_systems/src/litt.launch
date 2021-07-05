@@ -1,0 +1,7 @@
+<launch>
+	<node pkg="litt_systems" name="pypixels" type="python-pixels.py" output="screen" />
+	<node pkg="litt_systems" name="vispy" type="vis.py" output="screen" />
+	<node pkg="litt_systems" name="littpy" type="litt.py" output="screen" />
+	<node pkg="litt_systems" name="aimlchatpy" type="aimlchat.py" output="screen" />
+	<node pkg="litt_systems" name="synthesizerpy" type="synthesizer.py" output="screen" />
+</launch>

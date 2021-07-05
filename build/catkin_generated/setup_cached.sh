@@ -7,8 +7,6 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/henry1701/Bin/Robotics/kitt/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/henry1701/Bin/Robotics/kitt/devel/lib:$LD_LIBRARY_PATH"
-export PWD='/home/henry1701/Bin/Robotics/kitt/build'
-export ROSLISP_PACKAGE_DIRECTORIES='/home/henry1701/Bin/Robotics/kitt/devel/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/henry1701/Bin/Robotics/kitt/src:$ROS_PACKAGE_PATH"
+export PKG_CONFIG_PATH='/opt/ros/noetic/lib/pkgconfig'
+export PWD='/home/henry1701/Bin/Robotics/litt/build'
+export ROS_PACKAGE_PATH='/home/henry1701/Bin/Robotics/litt/src:/opt/ros/noetic/share'

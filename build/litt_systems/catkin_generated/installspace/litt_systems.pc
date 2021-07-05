@@ -1,0 +1,8 @@
+prefix=/home/henry1701/Bin/Robotics/litt/install
+
+Name: litt_systems
+Description: Description of litt_systems
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
