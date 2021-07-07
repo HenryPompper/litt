@@ -7,6 +7,7 @@ import pygame
 from datetime import datetime
 import signal
 import sys
+import random
 
 def signal_handler(signal, frame):
     sys.exit(0)
@@ -22,6 +23,24 @@ configBGColor = [ 20,20,0 ]
 interfaceRate = 1 
 frameCounter = 0
 level = 0
+
+levels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+targetLevels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+peakVol = 50
+lowVol = 0
+levelCalcTimer = 0
+levelCalcRate = 1000
+#triggers = [ 8,8,1,2,0,8,9,11,0,21,24,20,0,5,2,0,5,8,10,0,8,9,11,0,21,24,20,0,5,2,2,5,0,20,24,21,0,11,9,8,0,10,8,5,0,2,5,0,20,24,21,0,11,9,8,0,2,1,8,8]
+#multipliers = [ 2.1,2.1,4.2,3,5,8.4,2,1.5,5.1,7,5,3,2.5,1.5,1.1,2.1,3.5,4.2,3,2,4.4,2,1.5,2.1,3,5,3,2.5,3.5,5.1,5.1,3.5,2.5,3,5,3,2.1,1.5,2,4.4,2,3,4.2,3.5,2.1,1.1,1.5,2.5,3,5,7,5.1,1.5,2,8.4,5,3,4.2,2.1,2.1 ]
+triggers = [31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,60,59,58,57,56,55,54,53,52,51,50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31]
+multipliers = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+def calculate_levels(_level):
+    global prevPeakVol
+    global peakVol
+    if peakVol < _level:
+        peakVol = _level
+    percentage = min((100 / max(1,peakVol) * _level),100)
+    return percentage
 
 def volume_cb(data):
     global level
@@ -162,6 +181,52 @@ def litt_animation(_level):
         color[2] = max(min(color[2] * (intLevel * 0.01), 255),0)
         pygame.draw.rect(screen, (color[0], color[1], color[2]), [(size[0] / 2)+block_width/2 + (block_width*0.25),vertical_position * (i+3),block_width,block_height - vertical_space],0)
 
+def kitt_animation(_level):
+    global intLevels
+    global levelDir
+    global color
+    global configColor
+    global levels
+    global lowVol
+    global peakVol
+    intLevel = 0
+    if _level != '':
+        try:
+            intLevels = int(_level * 1)
+        except ValueError:
+            print('intLevel is invalid.  Only integers are acceptable')
+            return
+    intLevels = calculate_levels(intLevels)
+    fadeSpeed = 5
+    ypos = int(size[1] / 2)
+    red = 255
+    blue = 30
+    green = 30
+    multiplier = 1
+    space = 4
+    barWidth = int(size[0] / 60) - space
+    xpos = barWidth + (space / 2)
+    for f in range(60):
+        if levels[f] > 0:
+            levels[f] -= fadeSpeed
+        if targetLevels[f] > 0:
+            targetLevels[f] -= fadeSpeed
+    for i in range(60):
+        if intLevels == triggers[i]:
+            multiplier = multipliers[i] * 2
+        elif intLevels >= triggers[i] and intLevels <= triggers[i] + 3:
+            multiplier = multipliers[i] / 2
+        else:
+            multiplier = max(((triggers[i] * 2) * 0.01) - 0.75, 0)
+            #            multiplier = random.randrange(100) * 0.01
+        myLvl = int(intLevels * multiplier)
+        if myLvl > targetLevels[i]:
+            targetLevels[i] = int(myLvl * (100/peakVol))
+        if levels[i] < targetLevels[i]:
+            levels[i] = int(levels[i] + ((targetLevels[i] - levels[i]) / 2))
+        pygame.draw.rect(screen, (red, green, blue), [xpos + (barWidth + space) * i,ypos,barWidth,-levels[i]], 0)
+        pygame.draw.rect(screen, ( 255, 255, 255 ), [xpos + (barWidth + space) * i,ypos,barWidth,levels[i]], 0)
+
 def visualizer():
     global color
     global configColor
@@ -181,7 +246,8 @@ def visualizer():
             if event.type == pygame.QUIT:
                 play = False
         screen.fill(configBGColor)
-        litt_animation(level)
+        kitt_animation(level)
+        #litt_animation(level)
         font = pygame.font.SysFont("sans-serif", 32)
         fontSmall = pygame.font.SysFont("sans-serif", 26)
         fontClock = pygame.font.SysFont("sans-serif", 56)
